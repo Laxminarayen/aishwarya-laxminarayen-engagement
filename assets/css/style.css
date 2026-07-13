@@ -66,30 +66,28 @@ button{ font-family: inherit; cursor: pointer; }
     box-shadow: 0 30px 80px var(--shadow), 0 2px 0 rgba(184,134,47,0.35);
     overflow: hidden;
   }
-  .hero-text-zone{ max-width: 380px; }
-  .preline{ font-size: 1.15rem; }
-  .preline.small{ font-size: 1rem; }
-  .ceremony-title{ font-size: 1.05rem; margin-top: 10px; }
-  .tagline{ font-size: 1.05rem; max-width: 330px; margin-top: 12px; }
-  .couple-names{ margin-top: 10px; }
-  .couple-names .name{ font-size: 3.4rem; }
-  .vel-divider{ width: 24px; height: 60px; }
-  .mini-flourish{ margin-top: 12px; gap: 10px; }
+  .hero-intro{ padding: 48px 40px 56px; }
+  .preline{ font-size: 1.25rem; }
+  .ceremony-title{ font-size: 1.2rem; margin-top: 12px; }
+  .tagline{ font-size: 1.2rem; max-width: 400px; margin: 14px auto 0; }
+  .couple-names .name{ font-size: 4rem; }
+  .vel-divider{ width: 26px; height: 64px; }
+  .mini-flourish{ margin-top: 20px; gap: 10px; }
   .mini-flourish .sunflower-icon{ width: 20px; height: 20px; }
   .mini-flourish .sunflower-icon.sm{ width: 15px; height: 15px; }
   .mini-flourish .sunflower-icon.md{ width: 23px; height: 23px; }
   .mini-flourish .divider-line{ width: 40px; }
-  .scroll-cue{ margin-top: 14px; font-size: 0.82rem; }
+  .scroll-cue{ margin-top: 18px; font-size: 0.95rem; }
   .chevron{ font-size: 1.3rem; }
 }
 
 @media (min-width: 1100px){
   .card-wrap{ max-width: 540px; }
-  .hero-text-zone{ max-width: 410px; }
-  .preline.small{ font-size: 1.05rem; }
-  .ceremony-title{ font-size: 1.1rem; }
-  .tagline{ font-size: 1.1rem; max-width: 350px; }
-  .couple-names .name{ font-size: 3.7rem; }
+  .hero-intro{ padding: 56px 48px 64px; }
+  .preline{ font-size: 1.3rem; }
+  .ceremony-title{ font-size: 1.25rem; }
+  .tagline{ font-size: 1.25rem; max-width: 420px; }
+  .couple-names .name{ font-size: 4.3rem; }
 }
 
 .panel{
@@ -158,42 +156,44 @@ button{ font-family: inherit; cursor: pointer; }
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 86%;
-  max-width: 320px;
+  width: 90%;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
-.hero-text-zone *{
-  text-shadow: 0 1px 2px rgba(251,243,231,0.95), 0 0 8px rgba(251,243,231,0.9), 0 0 18px rgba(251,243,231,0.75), 0 0 32px rgba(251,243,231,0.5);
+
+/* Clean, flat-background block below the illustration — carries every
+   sentence of copy so nothing has to compete with the artwork for
+   contrast or be shrunk to fit a cramped overlay zone. */
+.hero-intro{
+  background: var(--ivory);
+  text-align: center;
+  padding: 34px 26px 40px;
 }
 
 .preline{
-  margin: 1px 0;
-  font-size: 0.95rem;
+  margin: 0;
+  font-size: 1.05rem;
+  line-height: 1.5;
   color: var(--ink);
-  opacity: 0.95;
 }
-.preline.small{ font-size: 0.72rem; line-height: 1.4; letter-spacing: 0.3px; }
 
 .ceremony-title{
   font-family: var(--font-head);
-  color: var(--gold);
+  color: var(--maroon);
   letter-spacing: 2px;
   text-transform: uppercase;
-  font-size: 0.76rem;
-  margin: 6px 0 0;
+  font-size: 1rem;
+  margin: 10px 0 0;
 }
 
 .tagline{
   font-family: var(--font-body);
-  font-style: italic;
-  font-size: 0.78rem;
-  line-height: 1.4;
+  font-size: 1.05rem;
+  line-height: 1.55;
   color: var(--maroon);
-  opacity: 0.95;
-  max-width: 250px;
-  margin: 7px auto 0;
+  max-width: 320px;
+  margin: 14px auto 0;
 }
 
 .couple-names{
@@ -201,20 +201,17 @@ button{ font-family: inherit; cursor: pointer; }
   flex-direction: column;
   align-items: center;
   gap: 0;
-  margin-top: 4px;
 }
 .couple-names .name{
   font-family: var(--font-script);
-  font-size: 2.5rem;
+  font-size: 2.9rem;
   line-height: 1.05;
-  background: linear-gradient(180deg, var(--maroon-deep), var(--maroon));
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
+  color: var(--maroon-deep);
+  filter: drop-shadow(0 1px 1px rgba(251,243,231,0.95)) drop-shadow(0 0 6px rgba(251,243,231,0.9));
 }
 .vel-divider{
-  width: 17px;
-  height: 42px;
+  width: 19px;
+  height: 46px;
   color: var(--gold);
   margin: 0;
   filter: drop-shadow(0 1px 2px rgba(74,20,20,0.3));
@@ -230,17 +227,17 @@ button{ font-family: inherit; cursor: pointer; }
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 6px;
-  margin-top: 6px;
+  gap: 8px;
+  margin-top: 22px;
 }
 .mini-flourish .sunflower-icon{
-  width: 15px;
-  height: 15px;
+  width: 17px;
+  height: 17px;
   transform-origin: 50% 100%;
   animation: flower-wave 3.4s ease-in-out infinite;
 }
-.mini-flourish .sunflower-icon.sm{ width: 11px; height: 11px; }
-.mini-flourish .sunflower-icon.md{ width: 17px; height: 17px; }
+.mini-flourish .sunflower-icon.sm{ width: 13px; height: 13px; }
+.mini-flourish .sunflower-icon.md{ width: 19px; height: 19px; }
 .mini-flourish .sunflower-icon:nth-of-type(1){ animation-duration: 3.1s; animation-delay: 0s; }
 .mini-flourish .sunflower-icon:nth-of-type(2){ animation-duration: 3.8s; animation-delay: .35s; }
 .mini-flourish .sunflower-icon:nth-of-type(3){ animation-duration: 3.5s; animation-delay: .7s; }
@@ -261,11 +258,11 @@ button{ font-family: inherit; cursor: pointer; }
 }
 
 .scroll-cue{
-  margin-top: 8px;
-  font-size: 0.66rem;
+  margin-top: 20px;
+  font-size: 0.85rem;
   letter-spacing: 1.3px;
   text-transform: uppercase;
-  color: var(--gold);
+  color: var(--maroon);
 }
 .chevron{
   font-size: 1.1rem;
@@ -277,15 +274,14 @@ button{ font-family: inherit; cursor: pointer; }
 }
 
 @media (max-width: 340px){
-  .hero-text-zone{ top: 41%; }
-  .preline.small{ font-size: 0.62rem; }
-  .ceremony-title{ font-size: 0.68rem; margin-top: 4px; }
-  .tagline{ font-size: 0.66rem; margin-top: 5px; }
-  .couple-names{ margin-top: 2px; }
-  .couple-names .name{ font-size: 1.95rem; }
-  .vel-divider{ width: 14px; height: 34px; }
-  .mini-flourish{ margin-top: 4px; }
-  .scroll-cue{ margin-top: 5px; font-size: 0.6rem; }
+  .hero-intro{ padding: 28px 20px 34px; }
+  .preline{ font-size: 0.95rem; }
+  .ceremony-title{ font-size: 0.9rem; }
+  .tagline{ font-size: 0.95rem; margin-top: 12px; }
+  .couple-names .name{ font-size: 2.35rem; }
+  .vel-divider{ width: 16px; height: 38px; }
+  .mini-flourish{ margin-top: 16px; }
+  .scroll-cue{ margin-top: 16px; font-size: 0.78rem; }
 }
 
 /* ---------------------------------------------------------------------- */
