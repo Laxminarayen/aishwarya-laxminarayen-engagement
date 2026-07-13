@@ -208,22 +208,31 @@ button{ font-family: inherit; cursor: pointer; }
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
+  gap: 8px;
   margin-top: 8px;
 }
 .mini-flourish .sunflower-icon{
   width: 18px;
   height: 18px;
-  animation: sway 3.2s ease-in-out infinite;
   transform-origin: 50% 100%;
+  animation: flower-wave 3.4s ease-in-out infinite;
 }
-.mini-flourish .sunflower-icon:nth-child(3){ animation-delay: .6s; }
-@keyframes sway{
-  0%,100%{ transform: rotate(-8deg); }
-  50%{ transform: rotate(8deg); }
+.mini-flourish .sunflower-icon.sm{ width: 13px; height: 13px; }
+.mini-flourish .sunflower-icon.md{ width: 20px; height: 20px; }
+.mini-flourish .sunflower-icon:nth-of-type(1){ animation-duration: 3.1s; animation-delay: 0s; }
+.mini-flourish .sunflower-icon:nth-of-type(2){ animation-duration: 3.8s; animation-delay: .35s; }
+.mini-flourish .sunflower-icon:nth-of-type(3){ animation-duration: 3.5s; animation-delay: .7s; }
+.mini-flourish .sunflower-icon:nth-of-type(4){ animation-duration: 4.1s; animation-delay: .2s; }
+@keyframes flower-wave{
+  0%{ transform: rotate(-7deg) translateY(0) scale(1); }
+  22%{ transform: rotate(4deg) translateY(-1.5px) scale(1.02); }
+  46%{ transform: rotate(-5deg) translateY(0) scale(1); }
+  68%{ transform: rotate(6deg) translateY(-1px) scale(1.01); }
+  86%{ transform: rotate(-3deg) translateY(0.5px) scale(1); }
+  100%{ transform: rotate(-7deg) translateY(0) scale(1); }
 }
 .mini-flourish .divider-line{
-  width: 36px;
+  width: 30px;
   height: 1px;
   background: var(--gold);
   opacity: 0.5;
@@ -587,14 +596,20 @@ button{ font-family: inherit; cursor: pointer; }
 
 .mandala-bg{
   position: absolute;
-  width: 540px;
-  height: 540px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: min(540px, 88vw, 88vh);
+  height: min(540px, 88vw, 88vh);
   color: var(--gold);
   opacity: 0.16;
   animation: spin 70s linear infinite;
 }
 .mandala-bg svg{ width: 100%; height: 100%; }
-@keyframes spin{ to{ transform: rotate(360deg); } }
+@keyframes spin{
+  from{ transform: translate(-50%, -50%) rotate(0deg); }
+  to{ transform: translate(-50%, -50%) rotate(360deg); }
+}
 
 .envelope{
   position: relative;
