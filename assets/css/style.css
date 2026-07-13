@@ -66,11 +66,30 @@ button{ font-family: inherit; cursor: pointer; }
     box-shadow: 0 30px 80px var(--shadow), 0 2px 0 rgba(184,134,47,0.35);
     overflow: hidden;
   }
-  .couple-names .name{ font-size: 3rem; }
+  .hero-text-zone{ max-width: 380px; }
+  .preline{ font-size: 1.15rem; }
+  .preline.small{ font-size: 1rem; }
+  .ceremony-title{ font-size: 1.05rem; margin-top: 10px; }
+  .tagline{ font-size: 1.05rem; max-width: 330px; margin-top: 12px; }
+  .couple-names{ margin-top: 10px; }
+  .couple-names .name{ font-size: 3.4rem; }
+  .vel-divider{ width: 24px; height: 60px; }
+  .mini-flourish{ margin-top: 12px; gap: 10px; }
+  .mini-flourish .sunflower-icon{ width: 20px; height: 20px; }
+  .mini-flourish .sunflower-icon.sm{ width: 15px; height: 15px; }
+  .mini-flourish .sunflower-icon.md{ width: 23px; height: 23px; }
+  .mini-flourish .divider-line{ width: 40px; }
+  .scroll-cue{ margin-top: 14px; font-size: 0.82rem; }
+  .chevron{ font-size: 1.3rem; }
 }
 
 @media (min-width: 1100px){
   .card-wrap{ max-width: 540px; }
+  .hero-text-zone{ max-width: 410px; }
+  .preline.small{ font-size: 1.05rem; }
+  .ceremony-title{ font-size: 1.1rem; }
+  .tagline{ font-size: 1.1rem; max-width: 350px; }
+  .couple-names .name{ font-size: 3.7rem; }
 }
 
 .panel{
