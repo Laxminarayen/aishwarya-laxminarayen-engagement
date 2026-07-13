@@ -698,6 +698,57 @@ button{ font-family: inherit; cursor: pointer; }
 }
 
 /* ---------------------------------------------------------------------- */
+/* Background music toggle                                                 */
+/* ---------------------------------------------------------------------- */
+
+#yt-audio-mount{
+  position: fixed;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  overflow: hidden;
+  pointer-events: none;
+  bottom: 0;
+  right: 0;
+}
+
+.music-toggle{
+  position: fixed;
+  bottom: 22px;
+  right: 18px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: var(--maroon);
+  border: 2px solid var(--gold-light);
+  color: var(--gold-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 6px 18px rgba(90,40,20,0.35);
+  z-index: 90;
+  cursor: pointer;
+  transition: transform .25s ease;
+}
+.music-toggle:active{ transform: scale(0.92); }
+.music-toggle svg{ width: 22px; height: 22px; opacity: 0.75; }
+.music-toggle.playing svg{
+  opacity: 1;
+  animation: note-spin 5s linear infinite;
+}
+.music-toggle.playing{ animation: music-pulse 2.2s ease-in-out infinite; }
+@keyframes music-pulse{
+  0%,100%{ box-shadow: 0 6px 18px rgba(90,40,20,0.35), 0 0 0 0 rgba(217,174,92,0.4); }
+  50%{ box-shadow: 0 6px 18px rgba(90,40,20,0.35), 0 0 0 9px rgba(217,174,92,0); }
+}
+@keyframes note-spin{ to{ transform: rotate(360deg); } }
+
+@media (prefers-reduced-motion: reduce){
+  .music-toggle.playing{ animation: none; }
+  .music-toggle.playing svg{ animation: none; }
+}
+
+/* ---------------------------------------------------------------------- */
 /* Falling petals                                                          */
 /* ---------------------------------------------------------------------- */
 

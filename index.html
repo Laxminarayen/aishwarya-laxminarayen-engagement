@@ -157,6 +157,16 @@
 <!-- Falling petals layer -->
 <div id="petals-layer" aria-hidden="true"></div>
 
+<!-- Background music (YouTube-hosted, audio only) -->
+<div id="yt-audio-mount" aria-hidden="true"></div>
+<button id="music-toggle" class="music-toggle" aria-label="Play background music" type="button">
+  <svg viewBox="0 0 24 24" aria-hidden="true">
+    <path d="M9 18V5l12-2v13" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="6" cy="18" r="3" fill="currentColor"/>
+    <circle cx="18" cy="16" r="3" fill="currentColor"/>
+  </svg>
+</button>
+
 <!-- Intro envelope overlay -->
 <div id="envelope-screen" role="button" tabindex="0" aria-label="Open invitation">
   <div class="mandala-bg" aria-hidden="true">
@@ -315,6 +325,7 @@
 
 <div id="toast" class="toast" role="status" aria-live="polite"></div>
 
+<script src="https://www.youtube.com/iframe_api"></script>
 <script src="assets/js/script.js"></script>
 </body>
 </html>

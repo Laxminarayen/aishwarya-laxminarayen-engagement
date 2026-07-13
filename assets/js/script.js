@@ -22,6 +22,7 @@
     envelopeScreen.classList.add('opening');
     invitation.classList.add('visible');
     startPetals();
+    playMusic();
     setTimeout(() => {
       envelopeScreen.classList.add('opened');
     }, 750);
@@ -212,5 +213,60 @@
     layer.appendChild(petal);
     setTimeout(() => petal.remove(), fallDuration * 1000 + 200);
   }
+
+  /* ---------------------------------------------------------------- */
+  /* Background music (YouTube-hosted, audio only)                     */
+  /* ---------------------------------------------------------------- */
+  const MUSIC_VIDEO_ID = 'WNC5rXl3lt0';
+  const musicToggle = document.getElementById('music-toggle');
+  let ytPlayer = null;
+  let ytReady = false;
+  let musicPlaying = false;
+  let playRequested = false;
+
+  window.onYouTubeIframeAPIReady = function () {
+    ytPlayer = new YT.Player('yt-audio-mount', {
+      height: '1',
+      width: '1',
+      videoId: MUSIC_VIDEO_ID,
+      playerVars: {
+        autoplay: 0,
+        controls: 0,
+        disablekb: 1,
+        fs: 0,
+        modestbranding: 1,
+        playsinline: 1,
+        loop: 1,
+        playlist: MUSIC_VIDEO_ID
+      },
+      events: {
+        onReady: () => {
+          ytReady = true;
+          if (playRequested) ytPlayer.playVideo();
+        },
+        onStateChange: (e) => {
+          musicPlaying = e.data === YT.PlayerState.PLAYING;
+          musicToggle.classList.toggle('playing', musicPlaying);
+        }
+      }
+    });
+  };
+
+  function playMusic() {
+    if (ytReady) {
+      ytPlayer.playVideo();
+    } else {
+      playRequested = true;
+    }
+  }
+
+  musicToggle.addEventListener('click', () => {
+    if (!ytReady) return;
+    if (musicPlaying) {
+      ytPlayer.pauseVideo();
+    } else {
+      ytPlayer.playVideo();
+    }
+  });
 
 })();
