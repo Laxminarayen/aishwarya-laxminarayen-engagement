@@ -66,8 +66,7 @@ button{ font-family: inherit; cursor: pointer; }
     box-shadow: 0 30px 80px var(--shadow), 0 2px 0 rgba(184,134,47,0.35);
     overflow: hidden;
   }
-  .hero-top-zone{ padding: 20px 26px 22px; }
-  .hero-bottom-zone{ padding: 18px 22px 20px; max-width: 320px; }
+  .hero-bottom-zone{ max-width: 320px; }
   .preline{ font-size: 1.2rem; }
   .ceremony-title{ font-size: 1.15rem; margin-top: 12px; }
   .tagline{ font-size: 1.2rem; margin-top: 14px; }
@@ -84,8 +83,7 @@ button{ font-family: inherit; cursor: pointer; }
 
 @media (min-width: 1100px){
   .card-wrap{ max-width: 540px; }
-  .hero-top-zone{ padding: 22px 30px 24px; }
-  .hero-bottom-zone{ padding: 20px 24px 22px; max-width: 340px; }
+  .hero-bottom-zone{ max-width: 340px; }
   .preline{ font-size: 1.3rem; }
   .ceremony-title{ font-size: 1.25rem; }
   .tagline{ font-size: 1.3rem; }
@@ -166,19 +164,18 @@ button{ font-family: inherit; cursor: pointer; }
   transform: translateX(-50%);
   width: 94%;
   text-align: center;
-  background: rgba(251,243,231,0.9);
-  border-radius: 20px;
-  box-shadow: 0 8px 24px rgba(90,40,20,0.12);
+}
+.hero-top-zone *,
+.hero-bottom-zone *{
+  text-shadow: 0 1px 1px rgba(251,243,231,0.95), 0 0 4px rgba(251,243,231,0.9), 0 0 9px rgba(251,243,231,0.7);
 }
 .hero-top-zone{
-  top: 15.5%;
-  padding: 11px 18px 13px;
+  top: 20%;
 }
 .hero-bottom-zone{
-  bottom: 3%;
+  top: 62%;
   width: 76%;
   max-width: 280px;
-  padding: 14px 16px 16px;
 }
 
 .hero-text-zone{
@@ -294,8 +291,8 @@ button{ font-family: inherit; cursor: pointer; }
 }
 
 @media (max-width: 340px){
-  .hero-top-zone{ top: 15%; padding: 10px 14px 12px; }
-  .hero-bottom-zone{ padding: 10px 14px 12px; }
+  .hero-top-zone{ top: 19%; }
+  .hero-bottom-zone{ top: 61%; }
   .preline{ font-size: 0.82rem; }
   .ceremony-title{ font-size: 0.78rem; margin-top: 6px; }
   .tagline{ font-size: 0.82rem; margin-top: 8px; }
