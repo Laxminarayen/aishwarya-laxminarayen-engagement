@@ -218,6 +218,7 @@
   /* Background music (YouTube-hosted, audio only)                     */
   /* ---------------------------------------------------------------- */
   const MUSIC_VIDEO_ID = 'WNC5rXl3lt0';
+  const MUSIC_START_SECONDS = 8;
   const musicToggle = document.getElementById('music-toggle');
   let ytPlayer = null;
   let ytReady = false;
@@ -237,12 +238,13 @@
         modestbranding: 1,
         playsinline: 1,
         loop: 1,
-        playlist: MUSIC_VIDEO_ID
+        playlist: MUSIC_VIDEO_ID,
+        start: MUSIC_START_SECONDS
       },
       events: {
         onReady: () => {
           ytReady = true;
-          if (playRequested) ytPlayer.playVideo();
+          if (playRequested) playMusic();
         },
         onStateChange: (e) => {
           musicPlaying = e.data === YT.PlayerState.PLAYING;
@@ -252,8 +254,14 @@
     });
   };
 
+  let hasStartedOnce = false;
+
   function playMusic() {
     if (ytReady) {
+      if (!hasStartedOnce) {
+        hasStartedOnce = true;
+        ytPlayer.seekTo(MUSIC_START_SECONDS, true);
+      }
       ytPlayer.playVideo();
     } else {
       playRequested = true;
