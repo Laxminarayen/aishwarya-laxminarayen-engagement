@@ -66,27 +66,29 @@ button{ font-family: inherit; cursor: pointer; }
     box-shadow: 0 30px 80px var(--shadow), 0 2px 0 rgba(184,134,47,0.35);
     overflow: hidden;
   }
-  .hero-intro{ padding: 48px 40px 56px; }
-  .preline{ font-size: 1.25rem; }
-  .ceremony-title{ font-size: 1.2rem; margin-top: 12px; }
-  .tagline{ font-size: 1.2rem; max-width: 400px; margin: 14px auto 0; }
+  .hero-top-zone{ padding: 20px 26px 22px; }
+  .hero-bottom-zone{ padding: 18px 22px 20px; max-width: 320px; }
+  .preline{ font-size: 1.2rem; }
+  .ceremony-title{ font-size: 1.15rem; margin-top: 12px; }
+  .tagline{ font-size: 1.2rem; margin-top: 14px; }
   .couple-names .name{ font-size: 4rem; }
   .vel-divider{ width: 26px; height: 64px; }
-  .mini-flourish{ margin-top: 20px; gap: 10px; }
+  .mini-flourish{ gap: 10px; }
   .mini-flourish .sunflower-icon{ width: 20px; height: 20px; }
   .mini-flourish .sunflower-icon.sm{ width: 15px; height: 15px; }
   .mini-flourish .sunflower-icon.md{ width: 23px; height: 23px; }
   .mini-flourish .divider-line{ width: 40px; }
-  .scroll-cue{ margin-top: 18px; font-size: 0.95rem; }
-  .chevron{ font-size: 1.3rem; }
+  .scroll-cue{ margin-top: 14px; font-size: 0.9rem; }
+  .chevron{ font-size: 1.1rem; }
 }
 
 @media (min-width: 1100px){
   .card-wrap{ max-width: 540px; }
-  .hero-intro{ padding: 56px 48px 64px; }
+  .hero-top-zone{ padding: 22px 30px 24px; }
+  .hero-bottom-zone{ padding: 20px 24px 22px; max-width: 340px; }
   .preline{ font-size: 1.3rem; }
   .ceremony-title{ font-size: 1.25rem; }
-  .tagline{ font-size: 1.25rem; max-width: 420px; }
+  .tagline{ font-size: 1.3rem; }
   .couple-names .name{ font-size: 4.3rem; }
 }
 
@@ -151,9 +153,37 @@ button{ font-family: inherit; cursor: pointer; }
   display: block;
 }
 
+/* Three overlay zones spread top/middle/bottom across the illustration
+   itself, so every line of copy lives on the hero — nothing is pushed
+   into a separate block that reads as a second page. The top and
+   bottom zones sit over busier artwork, so they get a soft translucent
+   backing plate to guarantee contrast; the middle (names) zone sits in
+   the illustration's open wash and needs no plate. */
+.hero-top-zone,
+.hero-bottom-zone{
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 94%;
+  text-align: center;
+  background: rgba(251,243,231,0.9);
+  border-radius: 20px;
+  box-shadow: 0 8px 24px rgba(90,40,20,0.12);
+}
+.hero-top-zone{
+  top: 15.5%;
+  padding: 11px 18px 13px;
+}
+.hero-bottom-zone{
+  bottom: 3%;
+  width: 76%;
+  max-width: 280px;
+  padding: 14px 16px 16px;
+}
+
 .hero-text-zone{
   position: absolute;
-  top: 50%;
+  top: 47%;
   left: 50%;
   transform: translate(-50%, -50%);
   width: 90%;
@@ -162,38 +192,28 @@ button{ font-family: inherit; cursor: pointer; }
   align-items: center;
 }
 
-/* Clean, flat-background block below the illustration — carries every
-   sentence of copy so nothing has to compete with the artwork for
-   contrast or be shrunk to fit a cramped overlay zone. */
-.hero-intro{
-  background: var(--ivory);
-  text-align: center;
-  padding: 34px 26px 40px;
-}
-
 .preline{
   margin: 0;
-  font-size: 1.05rem;
-  line-height: 1.5;
+  font-size: 0.92rem;
+  line-height: 1.35;
   color: var(--ink);
 }
 
 .ceremony-title{
   font-family: var(--font-head);
   color: var(--maroon);
-  letter-spacing: 2px;
+  letter-spacing: 1.6px;
   text-transform: uppercase;
-  font-size: 1rem;
-  margin: 10px 0 0;
+  font-size: 0.86rem;
+  margin: 6px 0 0;
 }
 
 .tagline{
   font-family: var(--font-body);
-  font-size: 1.05rem;
-  line-height: 1.55;
+  font-size: 0.9rem;
+  line-height: 1.35;
   color: var(--maroon);
-  max-width: 320px;
-  margin: 14px auto 0;
+  margin: 8px 0 0;
 }
 
 .couple-names{
@@ -228,7 +248,7 @@ button{ font-family: inherit; cursor: pointer; }
   align-items: center;
   justify-content: center;
   gap: 8px;
-  margin-top: 22px;
+  margin-top: 0;
 }
 .mini-flourish .sunflower-icon{
   width: 17px;
@@ -258,14 +278,14 @@ button{ font-family: inherit; cursor: pointer; }
 }
 
 .scroll-cue{
-  margin-top: 20px;
-  font-size: 0.85rem;
-  letter-spacing: 1.3px;
+  margin-top: 10px;
+  font-size: 0.72rem;
+  letter-spacing: 1.1px;
   text-transform: uppercase;
   color: var(--maroon);
 }
 .chevron{
-  font-size: 1.1rem;
+  font-size: 0.95rem;
   animation: bob 2s ease-in-out infinite;
 }
 @keyframes bob{
@@ -274,14 +294,14 @@ button{ font-family: inherit; cursor: pointer; }
 }
 
 @media (max-width: 340px){
-  .hero-intro{ padding: 28px 20px 34px; }
-  .preline{ font-size: 0.95rem; }
-  .ceremony-title{ font-size: 0.9rem; }
-  .tagline{ font-size: 0.95rem; margin-top: 12px; }
-  .couple-names .name{ font-size: 2.35rem; }
-  .vel-divider{ width: 16px; height: 38px; }
-  .mini-flourish{ margin-top: 16px; }
-  .scroll-cue{ margin-top: 16px; font-size: 0.78rem; }
+  .hero-top-zone{ top: 15%; padding: 10px 14px 12px; }
+  .hero-bottom-zone{ padding: 10px 14px 12px; }
+  .preline{ font-size: 0.82rem; }
+  .ceremony-title{ font-size: 0.78rem; margin-top: 6px; }
+  .tagline{ font-size: 0.82rem; margin-top: 8px; }
+  .couple-names .name{ font-size: 2.1rem; }
+  .vel-divider{ width: 15px; height: 36px; }
+  .scroll-cue{ font-size: 0.62rem; }
 }
 
 /* ---------------------------------------------------------------------- */
