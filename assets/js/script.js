@@ -218,7 +218,7 @@
   /* Background music (YouTube-hosted, audio only)                     */
   /* ---------------------------------------------------------------- */
   const MUSIC_VIDEO_ID = 'WNC5rXl3lt0';
-  const MUSIC_START_SECONDS = 8;
+  const MUSIC_START_SECONDS = 9;
   const musicToggle = document.getElementById('music-toggle');
   let ytPlayer = null;
   let ytReady = false;
