@@ -240,7 +240,7 @@
     if (p && typeof p.catch === 'function') p.catch(() => { /* blocked; retried on next gesture */ });
   }
 
-  // Waits 2s after the envelope tap before starting playback, so the
+  // Waits 1s after the envelope tap before starting playback, so the
   // music kicks in once the invitation is actually opening rather than
   // the instant the envelope is touched.
   function scheduleMusicKickoff() {
@@ -250,7 +250,7 @@
     setTimeout(() => {
       suppressRetryUntilKickoff = false;
       playMusic();
-    }, 2000);
+    }, 1000);
   }
 
   musicToggle.addEventListener('click', () => {
