@@ -215,60 +215,25 @@
   }
 
   /* ---------------------------------------------------------------- */
-  /* Background music (local file, seamless 9s-33s loop)               */
+  /* Background music (local file, pre-trimmed to the 9s-33s clip so   */
+  /* the browser's native loop repeats it with no runtime seeking)     */
   /* ---------------------------------------------------------------- */
-  const MUSIC_START_SECONDS = 9;
-  const MUSIC_LOOP_END_SECONDS = 33;
   const musicToggle = document.getElementById('music-toggle');
   const bgMusic = document.getElementById('bg-music');
   let musicPlaying = false;
   let musicStarted = false;
-  let hasStartedOnce = false;
-  let loopWatcher = null;
-
-  function startLoopWatcher() {
-    stopLoopWatcher();
-    loopWatcher = setInterval(() => {
-      if (bgMusic.currentTime >= MUSIC_LOOP_END_SECONDS) {
-        bgMusic.currentTime = MUSIC_START_SECONDS;
-      }
-    }, 100);
-  }
-
-  function stopLoopWatcher() {
-    if (loopWatcher) {
-      clearInterval(loopWatcher);
-      loopWatcher = null;
-    }
-  }
 
   bgMusic.addEventListener('play', () => {
     musicPlaying = true;
     musicStarted = true;
     musicToggle.classList.add('playing');
-    startLoopWatcher();
   });
   bgMusic.addEventListener('pause', () => {
     musicPlaying = false;
     musicToggle.classList.remove('playing');
-    stopLoopWatcher();
   });
 
   function playMusic() {
-    // Setting currentTime before metadata has loaded (readyState 0,
-    // HAVE_NOTHING) is silently ignored by the browser, so the seek to
-    // the 9s start mark has to wait for loadedmetadata. play() itself is
-    // still called synchronously from the gesture so autoplay isn't blocked.
-    if (!hasStartedOnce) {
-      hasStartedOnce = true;
-      if (bgMusic.readyState >= 1) {
-        bgMusic.currentTime = MUSIC_START_SECONDS;
-      } else {
-        bgMusic.addEventListener('loadedmetadata', () => {
-          bgMusic.currentTime = MUSIC_START_SECONDS;
-        }, { once: true });
-      }
-    }
     const p = bgMusic.play();
     if (p && typeof p.catch === 'function') p.catch(() => { /* blocked; retried on next gesture */ });
   }
