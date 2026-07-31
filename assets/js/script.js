@@ -22,7 +22,7 @@
     envelopeScreen.classList.add('opening');
     invitation.classList.add('visible');
     startPetals();
-    playMusic();
+    scheduleMusicKickoff();
     setTimeout(() => {
       envelopeScreen.classList.add('opened');
     }, 750);
@@ -222,6 +222,8 @@
   const bgMusic = document.getElementById('bg-music');
   let musicPlaying = false;
   let musicStarted = false;
+  let musicKickoffScheduled = false;
+  let suppressRetryUntilKickoff = false;
 
   bgMusic.addEventListener('play', () => {
     musicPlaying = true;
@@ -238,6 +240,19 @@
     if (p && typeof p.catch === 'function') p.catch(() => { /* blocked; retried on next gesture */ });
   }
 
+  // Waits 0.5s after the envelope tap before starting playback, so the
+  // music kicks in once the invitation is actually opening rather than
+  // the instant the envelope is touched.
+  function scheduleMusicKickoff() {
+    if (musicKickoffScheduled) return;
+    musicKickoffScheduled = true;
+    suppressRetryUntilKickoff = true;
+    setTimeout(() => {
+      suppressRetryUntilKickoff = false;
+      playMusic();
+    }, 500);
+  }
+
   musicToggle.addEventListener('click', () => {
     if (musicPlaying) {
       bgMusic.pause();
@@ -248,13 +263,17 @@
 
   // Some Android browsers can silently block the first play() attempt
   // depending on how the gesture was dispatched. Retry on every
-  // subsequent tap/click until playback actually starts.
+  // subsequent tap/click until playback actually starts — but not
+  // during the 0.5s kickoff window itself, otherwise this listener
+  // (which also sees the envelope-tap click as it bubbles to document)
+  // would fire play() immediately and defeat the intended delay.
   function retryMusicOnGesture() {
     if (musicStarted) {
       document.removeEventListener('click', retryMusicOnGesture);
       document.removeEventListener('touchend', retryMusicOnGesture);
       return;
     }
+    if (suppressRetryUntilKickoff) return;
     if (envelopeScreen.classList.contains('opening')) playMusic();
   }
   document.addEventListener('click', retryMusicOnGesture);
