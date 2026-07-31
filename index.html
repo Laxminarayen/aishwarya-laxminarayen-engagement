@@ -157,8 +157,8 @@
 <!-- Falling petals layer -->
 <div id="petals-layer" aria-hidden="true"></div>
 
-<!-- Background music (YouTube-hosted, audio only) -->
-<div id="yt-audio-mount" aria-hidden="true"></div>
+<!-- Background music (local, audio only) -->
+<audio id="bg-music" src="assets/music/Music.mp4" preload="auto" loop playsinline></audio>
 <button id="music-toggle" class="music-toggle" aria-label="Play background music" type="button">
   <svg viewBox="0 0 24 24" aria-hidden="true">
     <path d="M9 18V5l12-2v13" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
@@ -326,7 +326,6 @@
 
 <div id="toast" class="toast" role="status" aria-live="polite"></div>
 
-<script src="https://www.youtube.com/iframe_api"></script>
 <script src="assets/js/script.js"></script>
 </body>
 </html>

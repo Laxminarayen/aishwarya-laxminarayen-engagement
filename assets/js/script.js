@@ -215,64 +215,24 @@
   }
 
   /* ---------------------------------------------------------------- */
-  /* Background music (YouTube-hosted, audio only)                     */
+  /* Background music (local file, seamless 9s-33s loop)               */
   /* ---------------------------------------------------------------- */
-  const MUSIC_VIDEO_ID = 'WNC5rXl3lt0';
   const MUSIC_START_SECONDS = 9;
   const MUSIC_LOOP_END_SECONDS = 33;
   const musicToggle = document.getElementById('music-toggle');
-  let ytPlayer = null;
-  let ytReady = false;
+  const bgMusic = document.getElementById('bg-music');
   let musicPlaying = false;
   let musicStarted = false;
-  let playRequested = false;
-  let loopWatcher = null;
-
-  window.onYouTubeIframeAPIReady = function () {
-    ytPlayer = new YT.Player('yt-audio-mount', {
-      height: '1',
-      width: '1',
-      videoId: MUSIC_VIDEO_ID,
-      playerVars: {
-        autoplay: 0,
-        controls: 0,
-        disablekb: 1,
-        fs: 0,
-        modestbranding: 1,
-        playsinline: 1,
-        loop: 1,
-        playlist: MUSIC_VIDEO_ID,
-        start: MUSIC_START_SECONDS
-      },
-      events: {
-        onReady: () => {
-          ytReady = true;
-          if (playRequested) playMusic();
-        },
-        onStateChange: (e) => {
-          musicPlaying = e.data === YT.PlayerState.PLAYING;
-          musicToggle.classList.toggle('playing', musicPlaying);
-          if (musicPlaying) {
-            musicStarted = true;
-            startLoopWatcher();
-          } else {
-            stopLoopWatcher();
-          }
-        }
-      }
-    });
-  };
-
   let hasStartedOnce = false;
+  let loopWatcher = null;
 
   function startLoopWatcher() {
     stopLoopWatcher();
     loopWatcher = setInterval(() => {
-      if (!ytPlayer || typeof ytPlayer.getCurrentTime !== 'function') return;
-      if (ytPlayer.getCurrentTime() >= MUSIC_LOOP_END_SECONDS) {
-        ytPlayer.seekTo(MUSIC_START_SECONDS, true);
+      if (bgMusic.currentTime >= MUSIC_LOOP_END_SECONDS) {
+        bgMusic.currentTime = MUSIC_START_SECONDS;
       }
-    }, 200);
+    }, 100);
   }
 
   function stopLoopWatcher() {
@@ -282,32 +242,48 @@
     }
   }
 
+  bgMusic.addEventListener('play', () => {
+    musicPlaying = true;
+    musicStarted = true;
+    musicToggle.classList.add('playing');
+    startLoopWatcher();
+  });
+  bgMusic.addEventListener('pause', () => {
+    musicPlaying = false;
+    musicToggle.classList.remove('playing');
+    stopLoopWatcher();
+  });
+
   function playMusic() {
-    if (ytReady) {
-      if (!hasStartedOnce) {
-        hasStartedOnce = true;
-        ytPlayer.seekTo(MUSIC_START_SECONDS, true);
+    // Setting currentTime before metadata has loaded (readyState 0,
+    // HAVE_NOTHING) is silently ignored by the browser, so the seek to
+    // the 9s start mark has to wait for loadedmetadata. play() itself is
+    // still called synchronously from the gesture so autoplay isn't blocked.
+    if (!hasStartedOnce) {
+      hasStartedOnce = true;
+      if (bgMusic.readyState >= 1) {
+        bgMusic.currentTime = MUSIC_START_SECONDS;
+      } else {
+        bgMusic.addEventListener('loadedmetadata', () => {
+          bgMusic.currentTime = MUSIC_START_SECONDS;
+        }, { once: true });
       }
-      ytPlayer.playVideo();
-    } else {
-      playRequested = true;
     }
+    const p = bgMusic.play();
+    if (p && typeof p.catch === 'function') p.catch(() => { /* blocked; retried on next gesture */ });
   }
 
   musicToggle.addEventListener('click', () => {
-    if (!ytReady) return;
     if (musicPlaying) {
-      ytPlayer.pauseVideo();
+      bgMusic.pause();
     } else {
       playMusic();
     }
   });
 
-  // Some Android browsers load the YouTube iframe API after the
-  // envelope-tap gesture has already ended, so the deferred playVideo()
-  // call in onReady no longer counts as a user-gesture continuation and
-  // gets silently blocked. Retry on every subsequent tap/click until
-  // playback actually starts.
+  // Some Android browsers can silently block the first play() attempt
+  // depending on how the gesture was dispatched. Retry on every
+  // subsequent tap/click until playback actually starts.
   function retryMusicOnGesture() {
     if (musicStarted) {
       document.removeEventListener('click', retryMusicOnGesture);
