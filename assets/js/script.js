@@ -215,7 +215,7 @@
   }
 
   /* ---------------------------------------------------------------- */
-  /* Background music (local file, pre-trimmed to the 9s-33s clip so   */
+  /* Background music (local file, pre-trimmed to the 0s-33s clip so   */
   /* the browser's native loop repeats it with no runtime seeking)     */
   /* ---------------------------------------------------------------- */
   const musicToggle = document.getElementById('music-toggle');
