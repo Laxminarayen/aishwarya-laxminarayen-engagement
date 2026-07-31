@@ -219,11 +219,14 @@
   /* ---------------------------------------------------------------- */
   const MUSIC_VIDEO_ID = 'WNC5rXl3lt0';
   const MUSIC_START_SECONDS = 9;
+  const MUSIC_LOOP_END_SECONDS = 33;
   const musicToggle = document.getElementById('music-toggle');
   let ytPlayer = null;
   let ytReady = false;
   let musicPlaying = false;
+  let musicStarted = false;
   let playRequested = false;
+  let loopWatcher = null;
 
   window.onYouTubeIframeAPIReady = function () {
     ytPlayer = new YT.Player('yt-audio-mount', {
@@ -249,12 +252,35 @@
         onStateChange: (e) => {
           musicPlaying = e.data === YT.PlayerState.PLAYING;
           musicToggle.classList.toggle('playing', musicPlaying);
+          if (musicPlaying) {
+            musicStarted = true;
+            startLoopWatcher();
+          } else {
+            stopLoopWatcher();
+          }
         }
       }
     });
   };
 
   let hasStartedOnce = false;
+
+  function startLoopWatcher() {
+    stopLoopWatcher();
+    loopWatcher = setInterval(() => {
+      if (!ytPlayer || typeof ytPlayer.getCurrentTime !== 'function') return;
+      if (ytPlayer.getCurrentTime() >= MUSIC_LOOP_END_SECONDS) {
+        ytPlayer.seekTo(MUSIC_START_SECONDS, true);
+      }
+    }, 200);
+  }
+
+  function stopLoopWatcher() {
+    if (loopWatcher) {
+      clearInterval(loopWatcher);
+      loopWatcher = null;
+    }
+  }
 
   function playMusic() {
     if (ytReady) {
@@ -273,8 +299,24 @@
     if (musicPlaying) {
       ytPlayer.pauseVideo();
     } else {
-      ytPlayer.playVideo();
+      playMusic();
     }
   });
+
+  // Some Android browsers load the YouTube iframe API after the
+  // envelope-tap gesture has already ended, so the deferred playVideo()
+  // call in onReady no longer counts as a user-gesture continuation and
+  // gets silently blocked. Retry on every subsequent tap/click until
+  // playback actually starts.
+  function retryMusicOnGesture() {
+    if (musicStarted) {
+      document.removeEventListener('click', retryMusicOnGesture);
+      document.removeEventListener('touchend', retryMusicOnGesture);
+      return;
+    }
+    if (envelopeScreen.classList.contains('opening')) playMusic();
+  }
+  document.addEventListener('click', retryMusicOnGesture);
+  document.addEventListener('touchend', retryMusicOnGesture, { passive: true });
 
 })();
