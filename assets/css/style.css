@@ -972,4 +972,6 @@ button{ font-family: inherit; cursor: pointer; }
     border: none !important;
     border-radius: 0 !important;
   }
+  .qr-card span{ margin-top: 14px !important; }
+  .qr-caption-extra{ display: none !important; }
 }
