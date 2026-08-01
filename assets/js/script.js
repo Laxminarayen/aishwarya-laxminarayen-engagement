@@ -2,14 +2,31 @@
   'use strict';
 
   const EVENT = {
-    title: "Aishwarya & Laxmi Narayen — Engagement Ceremony",
+    title: "Aishwarya & Laxmi Narayen — Engagement Celebration",
     startISO: "2026-09-13T09:00:00+05:30",
     endISO: "2026-09-13T10:00:00+05:30",
     location: "Panigraha Kalyana Mandapam, 9/A, Aryagowda Rd, Gokulam Colony, Ramakrishnapuram, West Mambalam, Chennai, Tamil Nadu 600033",
-    description: "Join us in celebrating the Engagement Ceremony of Aishwarya & Laxmi Narayen."
+    description: "Join us for the Engagement Celebration of Aishwarya & Laxmi Narayen."
   };
 
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---------------------------------------------------------------- */
+  /* Randomize name order in a few spots, independently, each load     */
+  /* ---------------------------------------------------------------- */
+  function maybeSwapNames(idFirst, idSecond) {
+    const first = document.getElementById(idFirst);
+    const second = document.getElementById(idSecond);
+    if (!first || !second) return;
+    if (Math.random() < 0.5) {
+      const tmp = first.textContent;
+      first.textContent = second.textContent;
+      second.textContent = tmp;
+    }
+  }
+  maybeSwapNames('envelope-name-a', 'envelope-name-b');
+  maybeSwapNames('hero-name-first', 'hero-name-second');
+  maybeSwapNames('footer-name-first', 'footer-name-second');
 
   /* ---------------------------------------------------------------- */
   /* Envelope intro                                                    */
@@ -157,7 +174,7 @@
   document.getElementById('share-btn').addEventListener('click', async () => {
     const shareData = {
       title: EVENT.title,
-      text: "You're invited! Aishwarya & Laxmi Narayen's Engagement Ceremony — 13th September 2026, 9:00 AM IST, Chennai.",
+      text: "You're invited! Aishwarya & Laxmi Narayen's Engagement Celebration — 13th September 2026, 9:00 AM IST, Chennai.",
       url: window.location.href
     };
     if (navigator.share) {
