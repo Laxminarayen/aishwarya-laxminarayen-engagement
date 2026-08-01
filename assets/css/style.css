@@ -963,7 +963,7 @@ button{ font-family: inherit; cursor: pointer; }
   }
   /* Trim the QR card's generous on-screen padding for print. */
   .qr-card{
-    padding: 8px !important;
+    padding: 0 !important;
     gap: 4px !important;
   }
 }
