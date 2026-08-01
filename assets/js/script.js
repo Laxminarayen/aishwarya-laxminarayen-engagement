@@ -154,9 +154,17 @@
   /* QR lightbox                                                       */
   /* ---------------------------------------------------------------- */
   const lightbox = document.getElementById('qr-lightbox');
-  document.getElementById('qr-open').addEventListener('click', () => {
+  const qrOpen = document.getElementById('qr-open');
+  function openQrLightbox() {
     lightbox.classList.add('open');
     lightbox.setAttribute('aria-hidden', 'false');
+  }
+  qrOpen.addEventListener('click', openQrLightbox);
+  qrOpen.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      openQrLightbox();
+    }
   });
   document.getElementById('qr-close').addEventListener('click', closeLightbox);
   lightbox.addEventListener('click', (e) => {
