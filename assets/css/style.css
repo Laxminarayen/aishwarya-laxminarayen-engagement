@@ -914,3 +914,52 @@ button{ font-family: inherit; cursor: pointer; }
   .chevron, .tap-hint, .mandala-bg{ animation: none; }
   .petal{ display: none; }
 }
+
+/* ---------------------------------------------------------------------- */
+/* Print / PDF export                                                      */
+/* ---------------------------------------------------------------------- */
+@media print{
+  *{
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  body{ background-image: none; }
+  #envelope-screen{ display: none !important; }
+  #invitation{ opacity: 1 !important; pointer-events: auto !important; }
+  .card-wrap{ box-shadow: none !important; max-width: 100% !important; border-radius: 0 !important; }
+  .reveal{ opacity: 1 !important; transform: none !important; transition: none !important; }
+  #petals-layer,
+  .music-toggle,
+  #bg-music,
+  .scroll-cue,
+  .countdown,
+  #add-calendar,
+  .venue-actions,
+  .map-embed,
+  .footer-share,
+  #qr-lightbox,
+  #toast{
+    display: none !important;
+  }
+  /* Rendered as a single continuous page (see PDF export script), so
+     break-inside:avoid isn't needed and was pushing the last section
+     onto a near-empty second page whenever the measured height was
+     off by a few px. */
+  /* text-shadow paints the text a second time (the shadow copy), and
+     Chromium's PDF text layer captures each shadow paint as its own
+     duplicate text run, so every line under .hero-top-zone/.hero-
+     bottom-zone came out doubled in the PDF's selectable text (e.g.
+     "Engagement CelebrationEngagement Celebration"). Drop the shadow
+     entirely for print and use a solid backing plate for contrast
+     instead, since a static PDF doesn't need the glow trick. */
+  .hero-top-zone *,
+  .hero-bottom-zone *{
+    text-shadow: none !important;
+  }
+  .hero-top-zone,
+  .hero-bottom-zone{
+    background: rgba(251,243,231,0.92) !important;
+    border-radius: 16px !important;
+    padding: 10px 16px !important;
+  }
+}
