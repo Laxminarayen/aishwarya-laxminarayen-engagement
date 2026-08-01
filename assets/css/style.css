@@ -958,9 +958,8 @@ button{ font-family: inherit; cursor: pointer; }
   }
   .hero-top-zone,
   .hero-bottom-zone{
-    background: rgba(251,243,231,0.92) !important;
-    border-radius: 12px !important;
-    padding: 3px 8px !important;
+    background: none !important;
+    padding: 0 !important;
   }
   /* Trim the QR card's generous on-screen padding for print. */
   .qr-card{
