@@ -3,6 +3,7 @@
    ========================================================================== */
 
 :root{
+  color-scheme: only light;
   --ivory:        #FBF3E7;
   --ivory-deep:    #F5E9D8;
   --maroon:        #7A1F2B;
