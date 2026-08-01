@@ -24,7 +24,6 @@
       second.textContent = tmp;
     }
   }
-  maybeSwapNames('envelope-name-a', 'envelope-name-b');
   maybeSwapNames('hero-name-first', 'hero-name-second');
   maybeSwapNames('footer-name-first', 'footer-name-second');
 
