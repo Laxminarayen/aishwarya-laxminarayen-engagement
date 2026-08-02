@@ -104,8 +104,8 @@ button{ font-family: inherit; cursor: pointer; }
   .mini-flourish .sunflower-icon.sm{ width: 15px; height: 15px; }
   .mini-flourish .sunflower-icon.md{ width: 23px; height: 23px; }
   .mini-flourish .divider-line{ width: 40px; }
-  .scroll-cue{ font-size: 0.9rem; }
-  .chevron{ font-size: 1.1rem; }
+  .scroll-cue{ font-size: 0.7rem; }
+  .chevron{ font-size: 0.85rem; }
 }
 
 @media (min-width: 1100px){
@@ -200,7 +200,7 @@ button{ font-family: inherit; cursor: pointer; }
   top: 20%;
 }
 .hero-bottom-zone{
-  top: 62%;
+  top: 56%;
   width: 76%;
   max-width: 280px;
 }
@@ -308,21 +308,12 @@ button{ font-family: inherit; cursor: pointer; }
    so it always sits where scrolling actually happens; shown/hidden by
    JS based on scroll position relative to the hero section. */
 .scroll-cue{
-  position: fixed;
-  left: 16px;
-  right: 84px;
-  bottom: 18px;
-  z-index: 20;
-  text-align: center;
-  font-size: 0.72rem;
-  letter-spacing: 1.1px;
+  margin-top: 10px;
+  font-size: 0.6rem;
+  letter-spacing: 1px;
   text-transform: uppercase;
   color: var(--maroon);
-  text-shadow: 0 1px 1px rgba(251,243,231,0.98), 0 0 5px rgba(251,243,231,0.95), 0 0 10px rgba(251,243,231,0.8);
-  transition: opacity .35s ease;
-  pointer-events: none;
 }
-.scroll-cue.scroll-cue--hidden{ opacity: 0; }
 .chevron{
   font-size: 0.95rem;
   animation: bob 2s ease-in-out infinite;
@@ -334,13 +325,13 @@ button{ font-family: inherit; cursor: pointer; }
 
 @media (max-width: 340px){
   .hero-top-zone{ top: 19%; }
-  .hero-bottom-zone{ top: 61%; }
+  .hero-bottom-zone{ top: 55%; }
   .preline{ font-size: 0.82rem; }
   .ceremony-title{ font-size: 0.78rem; margin-top: 6px; }
   .tagline{ font-size: 0.82rem; margin-top: 8px; }
   .couple-names .name{ font-size: 2.1rem; }
   .vel-divider{ width: 15px; height: 36px; }
-  .scroll-cue{ font-size: 0.62rem; }
+  .scroll-cue{ font-size: 0.52rem; }
 }
 
 /* ---------------------------------------------------------------------- */

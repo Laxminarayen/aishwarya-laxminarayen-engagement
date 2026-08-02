@@ -51,17 +51,6 @@
   });
 
   /* ---------------------------------------------------------------- */
-  /* Scroll cue — fixed to the viewport bottom, hides as soon as the    */
-  /* visitor actually starts scrolling (regardless of hero height)      */
-  /* ---------------------------------------------------------------- */
-  const scrollCue = document.getElementById('scroll-cue');
-  function updateScrollCue() {
-    scrollCue.classList.toggle('scroll-cue--hidden', window.scrollY > 60);
-  }
-  window.addEventListener('scroll', updateScrollCue, { passive: true });
-  updateScrollCue();
-
-  /* ---------------------------------------------------------------- */
   /* Scroll reveal                                                     */
   /* ---------------------------------------------------------------- */
   const revealEls = document.querySelectorAll('[data-reveal]');
