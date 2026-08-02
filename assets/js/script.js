@@ -24,6 +24,7 @@
       second.textContent = tmp;
     }
   }
+  maybeSwapNames('envelope-name-a', 'envelope-name-b');
   maybeSwapNames('hero-name-first', 'hero-name-second');
   maybeSwapNames('footer-name-first', 'footer-name-second');
 
@@ -48,6 +49,17 @@
   envelopeScreen.addEventListener('keypress', (e) => {
     if (e.key === 'Enter' || e.key === ' ') openInvitation();
   });
+
+  /* ---------------------------------------------------------------- */
+  /* Scroll cue — fixed to the viewport bottom, hides as soon as the    */
+  /* visitor actually starts scrolling (regardless of hero height)      */
+  /* ---------------------------------------------------------------- */
+  const scrollCue = document.getElementById('scroll-cue');
+  function updateScrollCue() {
+    scrollCue.classList.toggle('scroll-cue--hidden', window.scrollY > 60);
+  }
+  window.addEventListener('scroll', updateScrollCue, { passive: true });
+  updateScrollCue();
 
   /* ---------------------------------------------------------------- */
   /* Scroll reveal                                                     */

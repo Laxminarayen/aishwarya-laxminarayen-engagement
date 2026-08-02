@@ -20,6 +20,32 @@
   --font-body:     'Cormorant Garamond', serif;
 }
 
+/* Some browsers (notably Samsung Internet's own "dark mode for
+   websites" feature) run their own legacy content-darkening pass that
+   doesn't reliably respect color-scheme:only light — it's a separate,
+   older mechanism than Chromium's standard Auto Dark Theme. The most
+   broadly-respected signal that a page has deliberately handled dark
+   mode (and shouldn't be auto-recolored) is actually having real
+   prefers-color-scheme:dark rules, so redeclare the same values here
+   — the page stays visually identical, but browsers now see genuine
+   dark-mode support and skip their own heuristic recoloring. */
+@media (prefers-color-scheme: dark){
+  :root{
+    color-scheme: light dark;
+    --ivory:        #FBF3E7;
+    --ivory-deep:    #F5E9D8;
+    --maroon:        #7A1F2B;
+    --maroon-deep:   #591420;
+    --gold:          #B8862F;
+    --gold-light:    #D9AE5C;
+    --sage:          #5B7553;
+    --rose:          #E8A6A6;
+    --ink:           #4A3226;
+    --shadow:        rgba(90, 40, 20, 0.25);
+  }
+  body{ background-color: var(--ivory-deep); color: var(--ink); }
+}
+
 *{ box-sizing: border-box; }
 
 html{ scroll-behavior: smooth; }
@@ -78,7 +104,7 @@ button{ font-family: inherit; cursor: pointer; }
   .mini-flourish .sunflower-icon.sm{ width: 15px; height: 15px; }
   .mini-flourish .sunflower-icon.md{ width: 23px; height: 23px; }
   .mini-flourish .divider-line{ width: 40px; }
-  .scroll-cue{ margin-top: 14px; font-size: 0.9rem; }
+  .scroll-cue{ font-size: 0.9rem; }
   .chevron{ font-size: 1.1rem; }
 }
 
@@ -278,13 +304,25 @@ button{ font-family: inherit; cursor: pointer; }
   opacity: 0.5;
 }
 
+/* Fixed to the actual viewport bottom (not a % of the tall hero image)
+   so it always sits where scrolling actually happens; shown/hidden by
+   JS based on scroll position relative to the hero section. */
 .scroll-cue{
-  margin-top: 10px;
+  position: fixed;
+  left: 16px;
+  right: 84px;
+  bottom: 18px;
+  z-index: 20;
+  text-align: center;
   font-size: 0.72rem;
   letter-spacing: 1.1px;
   text-transform: uppercase;
   color: var(--maroon);
+  text-shadow: 0 1px 1px rgba(251,243,231,0.98), 0 0 5px rgba(251,243,231,0.95), 0 0 10px rgba(251,243,231,0.8);
+  transition: opacity .35s ease;
+  pointer-events: none;
 }
+.scroll-cue.scroll-cue--hidden{ opacity: 0; }
 .chevron{
   font-size: 0.95rem;
   animation: bob 2s ease-in-out infinite;

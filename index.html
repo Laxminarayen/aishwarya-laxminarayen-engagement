@@ -182,7 +182,7 @@
     </div>
     <div class="envelope-front"></div>
     <div class="envelope-label">
-      <span class="mono">L</span><span class="amp-small">&amp;</span><span class="mono">A</span>
+      <span class="mono" id="envelope-name-a">L</span><span class="amp-small">&amp;</span><span class="mono" id="envelope-name-b">A</span>
     </div>
   </div>
   <p class="tap-hint">✦ Tap to Open Your Invitation ✦</p>
@@ -220,11 +220,12 @@
             <svg class="sunflower-icon md"><use href="#sunflower-icon"/></svg>
             <svg class="sunflower-icon sm"><use href="#sunflower-icon"/></svg>
           </div>
-          <div class="scroll-cue reveal" data-reveal style="transition-delay:.3s">
-            <span>Scroll to unfold the details</span>
-            <div class="chevron">⌄</div>
-          </div>
         </div>
+      </div>
+
+      <div class="scroll-cue" id="scroll-cue">
+        <span>Scroll to unfold the details</span>
+        <div class="chevron">⌄</div>
       </div>
     </section>
 
